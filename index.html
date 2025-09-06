@@ -1,79 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Small HTML Sample</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><styles class="css"></styles></title>
   <style>
-    :root { --bg: #ffffff; --fg: #1f2937; --accent: #3b82f6; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; background: var(--bg); color: var(--fg); }
-    header { padding: 1rem 1.25rem; border-bottom: 1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; }
-    main { max-width: 760px; margin: 2rem auto; padding: 0 1.25rem; }
-    h1 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0; }
-    .card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
-    button { cursor: pointer; border: 1px solid #e5e7eb; border-radius: 999px; padding: .5rem .9rem; background: #fff; }
-    button.primary { background: var(--accent); color: white; border-color: var(--accent); }
-    .row { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
-    .muted { color: #6b7280; font-size: .9rem; }
-    footer { border-top: 1px solid #e5e7eb; padding: 1rem 1.25rem; text-align:center; color:#6b7280; }
-    /* Dark mode */
-    .dark { --bg: #0b1120; --fg: #e5e7eb; --accent: #60a5fa; }
-    .dark header, .dark footer, .dark .card, .dark button { border-color: #1f2937; }
-    .dark button { background: #0f172a; color: var(--fg); }
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Navigation bar */
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      background: #444;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+    }
+
+    nav ul li a:hover {
+      background: #666;
+      border-radius: 5px;
+    }
+
+    /* Main content */
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Buttons */
+    button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Responsive (mobile) */
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <h1>Small HTML Sample</h1>
-    <div class="row">
-      <button id="themeBtn" title="Toggle dark mode">🌙 Toggle Theme</button>
-      <a href="#content" class="muted">Skip to content</a>
-    </div>
+    <h1>Welcome to My Sample Website</h1>
   </header>
 
-  <main id="content">
-    <div class="card" aria-live="polite">
-      <h2>Interactive Counter</h2>
-      <p class="muted">This is a tiny, accessible HTML page with a pinch of CSS and JS.</p>
-      <div class="row" style="margin:.5rem 0 1rem">
-        <button id="dec">−</button>
-        <output id="count" role="status" aria-live="polite" style="min-width:2.5ch; text-align:center">0</output>
-        <button id="inc" class="primary">+</button>
-      </div>
-      <button id="reset">Reset</button>
-    </div>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <main>
+    <h2>About This Page</h2>
+    <p>This is a simple HTML and CSS example. You can use this as a base to create your own website.</p>
+
+    <button>Click Me</button>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <small>© <span id="year"></span> Mini Sample • No frameworks required ✨</small>
+    <p>&copy; 2025 My Sample Website</p>
   </footer>
 
-  <script>
-    const body = document.body;
-    const themeBtn = document.getElementById('themeBtn');
-    const inc = document.getElementById('inc');
-    const dec = document.getElementById('dec');
-    const reset = document.getElementById('reset');
-    const countOut = document.getElementById('count');
-    const year = document.getElementById('year');
-
-    // Initialize year and restore theme/counter from localStorage
-    year.textContent = new Date().getFullYear();
-    let count = Number(localStorage.getItem('count') || 0);
-    countOut.value = count;
-    if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
-
-    themeBtn.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-      themeBtn.textContent = body.classList.contains('dark') ? '☀️ Toggle Theme' : '🌙 Toggle Theme';
-    });
-
-    inc.addEventListener('click', () => { countOut.value = ++count; localStorage.setItem('count', count); });
-    dec.addEventListener('click', () => { countOut.value = --count; localStorage.setItem('count', count); });
-    reset.addEventListener('click', () => { count = 0; countOut.value = 0; localStorage.setItem('count', 0); });
-  </script>
 </body>
-   <h1>THis is version v6<h1>
 </html>
- 
